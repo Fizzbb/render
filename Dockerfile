@@ -18,6 +18,7 @@ ENV HW="GPU"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+        vim \
 	wget \ 
 	libopenexr-dev \ 
 	bzip2 \ 
@@ -51,4 +52,7 @@ RUN rm -rf ${BLENDER_PATH}/python/lib/python3.10/site-packages/numpy
 RUN ${BLENDERPY} -m ensurepip && ${BLENDERPIP} install --upgrade pip && ${BLENDERPIP} install numpy
 
 # Set the working directory
-WORKDIR /
+RUN mkdir /render_results/
+WORKDIR /render
+COPY . .
+CMD ["sleep", "infinity"]
